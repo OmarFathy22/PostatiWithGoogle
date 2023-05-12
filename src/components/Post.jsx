@@ -23,7 +23,7 @@ import Favorite from "@mui/icons-material/Favorite";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import ShareIcon from "@mui/icons-material/Share";
-function Post({theme,showList,ID,deletePost,updatePost , value , loading , post }) {
+function Post({theme,showList,ID,deletePost,updatePost , value , loading , post , uid }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   
@@ -99,17 +99,17 @@ function Post({theme,showList,ID,deletePost,updatePost , value , loading , post 
                   TransitionComponent={Fade}
 
                 >
-                  <MenuItem 
+                  {uid === JSON.parse(localStorage.getItem("user")).sub && (
+                    <MenuItem 
                     sx={{ p: "5px 30px" }}
                     onClick={() => {
                       handleClose();
                       deletePost(post.id);
-                    
-
                     }}
                   >
                     Delete
                   </MenuItem>
+                  )}
                   <MenuItem sx={{ p: "5px 30px" }} onClick={handleClose}>
                     Edit
                   </MenuItem>
@@ -172,7 +172,8 @@ function Post({theme,showList,ID,deletePost,updatePost , value , loading , post 
               <ShareIcon />
             </IconButton>
             <Box sx={{ flexGrow: "1" }} />
-            <IconButton
+            {uid === JSON.parse(localStorage.getItem("user")).sub && (
+              <IconButton
               sx={{
                 "&:hover": {
                   backgroundColor:{xs:"transparent",md:"rgba(255, 255, 255, 0.08)"},
@@ -184,6 +185,7 @@ function Post({theme,showList,ID,deletePost,updatePost , value , loading , post 
             >
               <DeleteIcon />
             </IconButton>
+            ) }
             <Checkbox
               sx={{
                 "&:hover": {

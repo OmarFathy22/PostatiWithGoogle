@@ -37,6 +37,10 @@ const MainContent = ({ theme, showList , uid }) => {
       liked: checked,
       bookmarked: checked2,
     });
+    await updateDoc(doc(db,"AllPosts", id), {
+      liked: checked,
+      bookmarked: checked2,
+    });
   };
 
   if (loading) {
@@ -72,7 +76,7 @@ const MainContent = ({ theme, showList , uid }) => {
       >
         {value?.docs?.map((post , index) => {
         return(
-          <Post key={index} theme={theme} showList={showList} ID={ID} deletePost={deletePost} updatePost={updatePost} value={value} loading={loading} post={post}/>
+          <Post key={index} theme={theme} showList={showList} ID={ID} deletePost={deletePost} updatePost={updatePost} value={value} loading={loading} post={post} uid = {uid}/>
         )
       })}
         <AddPostModal theme={theme} ID={ID} FEELING={FEELING} setFEELING={setFEELING} />
