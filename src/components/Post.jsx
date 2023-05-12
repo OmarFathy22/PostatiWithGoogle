@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import  {useState } from "react";
-import me from "../../public/vite.svg";
 import {
   Avatar,
   Box,
@@ -23,7 +23,7 @@ import Favorite from "@mui/icons-material/Favorite";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import ShareIcon from "@mui/icons-material/Share";
-function Post({theme,showList,ID,deletePost,updatePost , value , loading , post}) {
+function Post({theme,showList,ID,deletePost,updatePost , value , loading , post }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   
@@ -35,7 +35,6 @@ function Post({theme,showList,ID,deletePost,updatePost , value , loading , post}
     setAnchorEl(null);
   };
 
-  console.log(JSON.parse(localStorage.getItem("user")).picture)
 
   return (
       <Card
@@ -50,11 +49,11 @@ function Post({theme,showList,ID,deletePost,updatePost , value , loading , post}
                   bgcolor: post.data().color,
                 }}
                 aria-label="recipe"
-                alt={JSON.parse(localStorage.getItem("user")).name.toString() || 'N'} 
-                src={JSON.parse(localStorage.getItem("user")).picture}
+                alt={post.data().picture} 
+                src={post.data().picture}
               >
                 {/* {post.data().name} */}
-                {JSON.parse(localStorage.getItem("user")).picture}
+                {post.data().picture}
               </Avatar>
             }
             action={
@@ -76,11 +75,11 @@ function Post({theme,showList,ID,deletePost,updatePost , value , loading , post}
             
             title={!post.data().feeling?<Typography
               sx={{  fontWeight: "300"}}
-              variant="body1" color="inherit">{post.data().title} </Typography>: (
+              variant="body1" color="inherit">{post.data().name} </Typography>: (
               <Stack direction="row">
               <Typography
                sx={{  fontWeight: "300"}}
-               variant="body1" color="inherit">{post.data().title} </Typography>
+               variant="body1" color="inherit">{post.data().name} </Typography>
               <Typography
                sx={{ ml: "5px" ,color:theme.palette.primary.main ,   fontWeight: "500"}}
                variant="body1" color="inherit">feels </Typography>
@@ -102,7 +101,7 @@ function Post({theme,showList,ID,deletePost,updatePost , value , loading , post}
                 >
                   <MenuItem 
                     sx={{ p: "5px 30px" }}
-                    onClick={(eo) => {
+                    onClick={() => {
                       handleClose();
                       deletePost(post.id);
                     

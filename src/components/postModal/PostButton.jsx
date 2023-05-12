@@ -1,4 +1,3 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import { blue } from "@mui/material/colors";
@@ -17,6 +16,7 @@ export default function CircularIntegration({
   success,
   setLOADING,
   setSuccess,
+  ID,
 }) {
   const buttonSx = {
     ...(success && {
@@ -36,7 +36,8 @@ export default function CircularIntegration({
           disabled={LOADING}
           onClick={() => {
             setLOADING(true);
-            func();
+            func(JSON.parse(localStorage.getItem("user")).sub , ID);
+            func("AllPosts", ID);
           }}
         >
           {children}

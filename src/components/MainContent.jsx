@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 // main
 import { useCollection } from "react-firebase-hooks/firestore";
 import {
@@ -8,7 +9,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { db } from "../../firebase/config";
-import React, { useState } from "react";
+import  { useState } from "react";
 import { doc } from "firebase/firestore";
 import {
   Box,
@@ -16,16 +17,19 @@ import {
 import AddPostModal from "./postModal/AddPostModal";
 import Post from "./Post";
 import SekeletonCard from "./SekeletonCard";
-const MainContent = ({ theme, showList }) => {
+const MainContent = ({ theme, showList , uid }) => {
+  console.log(uid)
+  console.log(typeof(uid))
   const [FEELING, setFEELING] = useState(null);
   const [value, loading] = useCollection(
-    query(collection(db, JSON.parse(localStorage.getItem("user")).sub), orderBy("id", "desc"))
+    query(collection(db, uid), orderBy("id", "desc"))
   );
   
   const ID = new Date().getTime().toString();
   const n = 8;
   const deletePost = async (id) => {
     await deleteDoc(doc(db, JSON.parse(localStorage.getItem("user")).sub , id));
+    await deleteDoc(doc(db, "AllPosts" , id));
   };
 
   const updatePost = async (id, checked, checked2) => {
@@ -66,7 +70,7 @@ const MainContent = ({ theme, showList }) => {
           theme.palette.mode === "light" ? " rgb(248, 248, 248)" : null,
       }}
       >
-        {value.docs.map((post , index) => {
+        {value?.docs?.map((post , index) => {
         return(
           <Post key={index} theme={theme} showList={showList} ID={ID} deletePost={deletePost} updatePost={updatePost} value={value} loading={loading} post={post}/>
         )

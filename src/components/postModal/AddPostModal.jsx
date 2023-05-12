@@ -64,12 +64,12 @@ export default function TransitionsModal({ theme, ID , FEELING , setFEELING }) {
     setLOADING(true);
     setUPLOADMEDIA(true);
   };
-  const SetData = async () => {
-    await setDoc(doc(db,JSON.parse(localStorage.getItem("user")).sub, ID), {
+  const SetData = async (UID , id) => {
+    await setDoc(doc(db,UID,id ), {
       feeling: FEELING,
       id: ID,
+      picture: JSON.parse(localStorage.getItem("user")).picture,
       name: JSON.parse(localStorage.getItem("user")).name ,
-      title:JSON.parse(localStorage.getItem("user")).name,
       color: "#30E3DF",
       date: moment().format("LLL"),
       mediaType: Media,
@@ -355,6 +355,8 @@ export default function TransitionsModal({ theme, ID , FEELING , setFEELING }) {
                 success={Postsuccess}
                 setLOADING={setPostLOADING}
                 setSuccess={setPostsuccess}
+                ID={ID}
+              
               >
                 Post
               </PostButton>
