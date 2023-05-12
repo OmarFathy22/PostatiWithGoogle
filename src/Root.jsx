@@ -15,7 +15,8 @@ const Root = (props) => {
   useEffect(() => {
     google.accounts.id.initialize({
       client_id:
-        "646245005567-5lqp8psc62h89093k15ilee8lrvdqrft.apps.googleusercontent.com",
+        // "646245005567-5lqp8psc62h89093k15ilee8lrvdqrft.apps.googleusercontent.com",
+        "646245005567-1a33npebn0q9i0sbdnanqqotpr216gjc.apps.googleusercontent.com",
       callback: handleCallbackResponse,
     });
   }, []);
